@@ -6,14 +6,14 @@
 
 body {
 	display: flex;
-	flex-grow: 1;
-	width: 100vw;
-	height: 100vh;
+	min-width: 100vw;
+	min-height: 100vh;
 	align-items: center;
 	justify-content: flex-start;
 	flex-direction: column;
 	background-image: url(./img/clouds-3488632_1920.jpg);
 	background-size: cover;
+	background-repeat: no-repeat;
 
 }
 
@@ -22,19 +22,40 @@ h1 {
 
 }
 
+main {
+	text-align: center;
+}
+
+
+select {
+	padding: 5px;
+	width: 80%;
+	font-size: 28px;
+	text-align: center;
+	border-width: 4px;
+	border-radius: 25px;
+	background-color: rgba(129, 170, 240, 0.5);
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+select:active,
+select:focus {
+	border-color: rgb(28, 81, 181);
+}
+
+
 div {
-	margin: 20px;
 	padding: 30px 50px;
 	font-size: 24px;
 	font-family: Arial, Helvetica, sans-serif;
 	line-height: 40px;
 	color: rgb(0, 0, 0);
-	background-color: rgba(28, 81, 181, 0.5);
 	border-radius: 25%;
 }
 
-@media (orientation:portrait) {
-	/* body {
-		background-size: auto;
-	} */
+h2,
+select,
+div {
+	margin: 20px;
+
 }

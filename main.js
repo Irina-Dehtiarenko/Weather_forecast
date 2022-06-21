@@ -1,41 +1,52 @@
-// Wariant 2 - jeśli pobieramy dane od użytkownika, nie najlepszy sposób, ale też można
+// Wariant 3
+//Wybrane miasto z gotowej listy miast
 
 
 let data = {}
-const city = (prompt('Witaj, proszę napisz w jakim mieście chcecz sprawdzić aktualną pogodę', 'enter the city name')).toLowerCase()
+let city = ''
 
+const selectCity = document.querySelector('select')
 const div = document.querySelector('div');
+const pCity = document.querySelector('p.city')
+const pDate = document.querySelector('p.date')
+const pHour = document.querySelector('p.hour')
+const pTemp = document.querySelector('p.temp')
+const phumidity = document.querySelector('p.humidity')
 
-const url = `https://danepubliczne.imgw.pl/api/data/synop/station/${city}`
 
-fetch(url)
-	.then((response) => {
-		console.log(response)
-		return response.json()
+const getData = (e) => {
+	const url = `https://danepubliczne.imgw.pl/api/data/synop/station/${city}`
 
-	})
-	.then(data => {
+	fetch(url)
+		.then((response) => {
+			console.log(response)
+			if (!response.ok) {
+				throw new Error('Invalid url address')
+			} else {
+				return response.json()
+			}
+		})
+		.then(data => {
 
-		showData(data)
+			showData(data)
 
-	})
-	.catch(err => console.error(err))
+		})
+		.catch(err => console.error(err))
 
+}
 
 const showData = (data) => {
-	const pCity = document.createElement('p')
-	const pdate = document.createElement('p')
-	const ptemp = document.createElement('p')
-	const phumidity = document.createElement('p')
-
-
+	div.style.backgroundColor = 'rgba(28, 81, 181, 0.5)'
 	pCity.textContent = `Miasto: ${data.stacja}`
-	pdate.textContent = `Data pomiaru: ${data.data_pomiaru}, godzina pomiaru: ${data.godzina_pomiaru}:00`
-	ptemp.textContent = `Temperatura: ${data.temperatura} stopni`
-	phumidity.textContent = `Wilgotność: ${data.temperatura} %`
+	pDate.textContent = `Data: ${data.data_pomiaru}`
+	pHour.textContent = `Godzina pomiaru: ${data.godzina_pomiaru}:00`
+	pTemp.textContent = `Temperatura: ${data.temperatura} stopni`
 
-	div.appendChild(pCity)
-	div.appendChild(pdate)
-	div.appendChild(ptemp)
-	div.appendChild(phumidity)
+	phumidity.textContent = `Wilgotność: ${data.wilgotnosc_wzgledna} %`
+
 }
+
+selectCity.addEventListener('change', (e) => {
+	city = e.target.value
+	getData()
+})
