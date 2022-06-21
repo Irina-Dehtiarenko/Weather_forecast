@@ -1,26 +1,22 @@
+// Wariant 2 - jeśli pobieramy dane od użytkownika, nie najlepszy sposób, ale też można
 
-
-
-
-const url = 'https://danepubliczne.imgw.pl/api/data/synop/station/zielonagora'
 
 let data = {}
+const city = (prompt('Witaj, proszę napisz w jakim mieście chcecz sprawdzić aktualną pogodę', 'enter the city name')).toLowerCase()
+
 const div = document.querySelector('div');
 
+const url = `https://danepubliczne.imgw.pl/api/data/synop/station/${city}`
 
 fetch(url)
 	.then((response) => {
 		console.log(response)
-		if (!response.ok) {
-			throw new Error('Błąd w api. Sprawdź URL')
-		} else {
-			return response.json()
-		}
-	})
-	.then(next => {
+		return response.json()
 
-		console.log(next)
-		showData(next)
+	})
+	.then(data => {
+
+		showData(data)
 
 	})
 	.catch(err => console.error(err))
