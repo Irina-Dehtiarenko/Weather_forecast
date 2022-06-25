@@ -1,12 +1,9 @@
-// Wariant 3
-//Wybrane miasto z gotowej listy miast
-
 
 let data = {}
 let city = ''
 
 const selectCity = document.querySelector('select')
-const div = document.querySelector('div');
+const div = document.querySelector('div.results');
 const pCity = document.querySelector('p.city')
 const pDate = document.querySelector('p.date')
 const pHour = document.querySelector('p.hour')
@@ -36,7 +33,6 @@ const getData = (e) => {
 }
 
 const showData = (data) => {
-	div.style.backgroundColor = 'rgba(28, 81, 181, 0.5)'
 	pCity.textContent = `Miasto: ${data.stacja}`
 	pDate.textContent = `Data: ${data.data_pomiaru}`
 	pHour.textContent = `Godzina pomiaru: ${data.godzina_pomiaru}:00`
